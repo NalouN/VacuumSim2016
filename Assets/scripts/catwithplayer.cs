@@ -26,7 +26,7 @@ public class catwithplayer : MonoBehaviour {
             //other.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.back * -1);
             VacuumBotController.control = false;
             // Calculate Angle Between the collision point and the player
-            if(other.GetComponent<VacuumBotController>().GetGround())
+            if(other.GetComponent<VacuumBotController>().IsGrounded)
             {
                 other.transform.position = new Vector3(other.transform.position.x, other.transform.position.y + 0.5f, other.transform.position.z);
             }
