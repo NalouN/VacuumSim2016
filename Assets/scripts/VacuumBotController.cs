@@ -8,6 +8,7 @@ public class VacuumBotController : MonoBehaviour
     public float RotationSpeed = 1;
     public float JumpForce = 5;
     public int MaxJumps = 1;
+    public static bool control = true;
     
     private Rigidbody rb;
     private int jumpsAvailable;
@@ -22,6 +23,7 @@ public class VacuumBotController : MonoBehaviour
 
     void Update()
     {
+        if (control) { 
         //Get axis
         float hAxis = Input.GetAxis("Horizontal");
         float vAxis = Input.GetAxis("Vertical");
@@ -39,6 +41,7 @@ public class VacuumBotController : MonoBehaviour
         //Reinitialize the jump count
         if (isGrounded)
             jumpsAvailable = MaxJumps;
+        }
     }
 
     void OnCollisionEnter(Collision hit)
@@ -47,5 +50,10 @@ public class VacuumBotController : MonoBehaviour
         {
             isGrounded = true;
         }
+    }
+
+    public bool GetGround()
+    {
+        return isGrounded;
     }
 }
