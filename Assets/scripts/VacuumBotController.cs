@@ -13,7 +13,10 @@ public class VacuumBotController : MonoBehaviour
     public bool IsGrounded { get { return isGrounded; } }
     public Camera PlayerCamera;
     public Transform CameraAnchor;
+    [HideInInspector]
     public bool HasControl = true;
+    public UnityEngine.UI.Text RemainingJumpsUIText;
+    public UnityEngine.UI.Image RemainingJumpsUIImage;
 
     private Rigidbody rb;
     private int jumpsAvailable;
@@ -53,6 +56,17 @@ public class VacuumBotController : MonoBehaviour
         {
             PlayerCamera.transform.position = CameraAnchor.position;
             PlayerCamera.transform.rotation = CameraAnchor.rotation;
+        }
+        //Adjust battery UI
+        if (RemainingJumpsUIText != null)
+        {
+            RemainingJumpsUIText.text = jumpsAvailable.ToString();
+        }
+        if (RemainingJumpsUIImage != null)
+        {
+            if (MaxJumps == 0)
+                RemainingJumpsUIImage.color = new UnityEngine.Color(1, 1, 1, 0.1f);
+            else RemainingJumpsUIImage.color = new UnityEngine.Color(1, 1, 1, System.Math.Max(0.1f, 1.0f * jumpsAvailable / MaxJumps));
         }
     }
 
